@@ -92,6 +92,7 @@ class MapViewDirections extends Component {
 			precision = 'low',
 			timePrecision = 'none',
 			channel,
+			traffic_model,
 		} = props;
 
 		if (!apikey) {
@@ -174,7 +175,7 @@ class MapViewDirections extends Component {
 			}
 
 			return (
-				this.fetchRoute(directionsServiceBaseUrl, origin, waypoints, destination, apikey, mode, language, region, precision, timePrecisionString, channel)
+				this.fetchRoute(directionsServiceBaseUrl, origin, waypoints, destination, apikey, mode, language, region, precision, timePrecisionString, channel, traffic_model)
 					.then(result => {
 						return result;
 					})
@@ -227,7 +228,7 @@ class MapViewDirections extends Component {
 			});
 	}
 
-	fetchRoute(directionsServiceBaseUrl, origin, waypoints, destination, apikey, mode, language, region, precision, timePrecision, channel) {
+	fetchRoute(directionsServiceBaseUrl, origin, waypoints, destination, apikey, mode, language, region, precision, timePrecision, channel, traffic_model) {
 
 		// Define the URL to call. Only add default parameters to the URL if it's a string.
 		let url = directionsServiceBaseUrl;
@@ -239,7 +240,12 @@ class MapViewDirections extends Component {
 			if(channel){
 				url+=`&channel=${channel}`;
 			}
+			if (traffic_model) {
+				url+=`&traffic_model=${traffic_model}`
+			}
 		}
+
+		console.log('Directions library URL => ', url);
 
 		return fetch(url)
 			.then(response => response.json())
