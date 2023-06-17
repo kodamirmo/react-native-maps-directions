@@ -233,10 +233,8 @@ class MapViewDirections extends Component {
 		// Define the URL to call. Only add default parameters to the URL if it's a string.
 		let url = directionsServiceBaseUrl;
 		if (typeof (directionsServiceBaseUrl) === 'string') {
-			url += `?origin=${origin}&waypoints=${waypoints}&destination=${destination}&key=${apikey}&mode=${mode.toLowerCase()}&language=${language}&region=${region}`;
-			if(timePrecision){
-				url+=`&departure_time=${timePrecision}`;
-			}
+			url += `?origin=${origin}&waypoints=${waypoints}&destination=${destination}&key=${apikey}&mode=${mode.toLowerCase()}&language=${language}&region=MX`;
+			url+=`&departure_time=now`;
 			if(channel){
 				url+=`&channel=${channel}`;
 			}
